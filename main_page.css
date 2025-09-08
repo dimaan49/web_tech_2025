@@ -1,0 +1,185 @@
+@font-face {
+    font-family: "Custom font";
+    src: url("https://fonts.google.com/share?selection.family=Rubik+Dirt");
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    background-color: rgb(234, 229, 167);
+    font-size: 35px;
+    margin: 0;
+    min-height: 100%;
+    padding: 0;
+}
+
+
+header {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family:  "Rubik Dirt";
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace;
+    text-shadow: 3px 2px black;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    background-color: #deac14;
+}
+
+h3 {
+    text-align: center;
+}
+
+footer {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+table {
+   margin: auto;
+}
+
+
+th {
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.block-footer-ref {
+    display:block;
+    background-color: yellowgreen ;
+}
+
+.block-footer-ref:hover {
+    color:rgb(116, 105, 18);
+}
+
+.block-main-ref {
+    display:block;
+    background-color: yellowgreen;
+}
+
+.block-main-ref:hover {
+    background-color: #0b990b;
+    margin-top: 0;
+}
+
+
+.face-ref {
+    display: flex;
+    justify-content: space-around;
+}
+
+.face-ref p {
+    margin: 0;
+}
+.footer-list {
+    margin-bottom: 0;
+    height: 20%;
+    color: black;
+    background-color: yellowgreen;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-list li {
+    color: rgb(54, 50, 50);
+}
+
+
+.navigation-list {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 35px;
+    display: flex;
+    list-style:  none;
+    justify-content: space-around;
+    
+}
+
+.menu-images {
+    display:flex;
+    justify-content: space-around;
+}
+
+.menu-images img {
+    border-radius: 10%;
+}
+
+
+
+.navigation-list li {
+    margin: 5px;
+    text-align: center;
+    flex: 1;
+}
+
+
+.main_header {
+    color: #0b990b;
+    background-color: rgb(205, 173, 42);
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+
+
+
+.schedule-table {
+    margin: auto;
+}
+
+.table-articles {
+    padding-bottom: 15px;
+    padding-right: 15px;
+    text-align: left;
+}
+
+.text-about {
+    text-align: justify;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-indent: 5%;
+}
+
+
+#schedule {
+    margin-bottom: 5%;
+    padding: 0;
+    text-align: center;
+}
+
+#about {
+    margin-top: 5%;
+    padding: 0;
+}
