@@ -21,6 +21,9 @@
                     <a href = "#menu", class = "block-main-ref" >Меню</a>
                 </li>
                 <li>
+                    <a class = "login-button" >Войти</a>
+                </li>
+                <li>
                     <a href = "#menu", class = "block-main-ref" >Хиты</a>
                 </li>
                 <li>
@@ -29,6 +32,41 @@
             </ul>
         </nav>
     </header>
+
+<div class="login-form">
+    <div class = "login-header">
+        <h2 class = "main_header">
+             LaunchTime
+        </h2>
+        <button class = "close-button"> X</button>
+    </div>
+    <form class = "log-pas-form", method = "post", action = "https://httpbin.org/post" >
+    <div class = "entering-fileds-log">
+        <input 
+        class = "login-field"
+        size="20"
+        type="text" 
+        placeholder="Логин"
+        >
+        <input 
+        class = "password-field"
+        type="password"
+        placeholder="Пароль"
+        >
+    </div>
+    <div class = "remember-fields">
+    <label>
+            <input type="checkbox", class = "autocomplete-submit"> 
+            <span>
+                Запомнить меня
+            </span>
+
+    </label>
+    
+    <button type="submit">Войти</button>
+    </div>
+    </form>
+</div>
 
 <h1 class = "main_header">
     Launch time
@@ -159,6 +197,100 @@
 <img src = "images/курица с картошкойjpg.jpg", width = "20%", alt = "курица с запеченной картошкой">
 </div>
 
+<form method="post", action = "https://httpbin.org/post">
+    <div class = "feedback-form">
+        <div class = "login-header">
+            <h2 class = "main_header">
+                LaunchTime Feedback
+            </h2>
+            <button class = "close-button-feedback"> X</button>
+        </div>
+        <div class = "main-appeal-form">
+            <div class = "name-mail-form" >
+                <h3 class = "appeal-header">
+                    Укажите имя и почту
+                </h3>
+                <input type = "text", placeholder="Введите ФИО", required>
+                <input type = "email", placeholder="email", required>
+            </div>
+            <h3 class = "appeal-header">
+            Откуда узнали о нас?
+            </h3>
+            <div class = "form-find-out">
+                <label>
+                    <input type = "radio", name = "find out" , id = "1">
+                    <span>
+                        От друзей
+                    </span>
+                </label>
+                <label>
+                    <input type = "radio", name = "find out" , id = "2">
+                    <span>
+                        От коллег
+                    </span>
+                </label>        
+                <label>
+                    <input type = "radio", name = "find out" , id = "3">
+                    <span>
+                        Из рекламы
+                    </span>
+                </label>
+                <label>
+                    <input type = "radio", name = "find out" , id = "4">
+                    <span>
+                        Из новостей
+                    </span>
+                </label>
+                
+
+            </div>
+            <h3 class = "appeal-header">
+                Тип обращения
+            </h3>
+            <div class = "appeal-type">
+                <label>
+                    <input type = "radio", name = "comp-offer">
+                    <span>
+                        Благодарность
+                    </span>
+                </label>
+                <label>
+                    <input type = "radio", name = "comp-offer">
+                    <span>
+                        Предложение
+                    </span>
+                </label>
+                <label>
+                    <input type = "radio", name = "comp-offer">
+                    <span>
+                        Жалоба
+                    </span>
+                </label>
+            </div>
+        <div class = "container-submit-text">
+            <div class = "appeal-text-container">
+                <input type = "text", placeholder= "Введите текст обрашения", class = "appeal-text">
+                <div class = "complience-file">
+                <input type = "file", accept=".jpg, .jpeg, .png, .svg, .txt, .docx, .pptx">
+                <label class = "complience">
+                    <input type = "checkbox", required>
+                    <span>
+                        Даю согласие на обработку данных
+                    </span>
+                </label>
+                </div>
+            </div>
+            <button type = "submit" class = "text-submit">
+                Отправить обращение
+            </button>
+        </div>
+        
+        </div>
+    
+    </div>
+</form>
+
+
     <footer> 
         <div>
             <ul class = "footer-list">
@@ -169,7 +301,7 @@
                     <a href = "#about", class = "block-footer-ref"> О нас</a>
                 </li>
                 <li> 
-                    <a href = "#", class = "block-footer-ref">Обратная связь</a>
+                    <a class = "block-footer-ref">Обратная связь</a>
                 </li>
                 <li>
                     ✉ LaunchTime@gmail.com
@@ -178,6 +310,10 @@
             </ul>
         </div>
     </footer>
+
+
+
+    <script src = "login.js"></script>
 </body>
 
 </html>
