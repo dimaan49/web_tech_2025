@@ -14,6 +14,9 @@ a {
 }
 
 body {
+    display: flex;
+    flex-direction: column ;
+    height: 100%;
     z-index: 0;
     background-color: rgb(234, 229, 167);
     font-size: min(2vw, 35px);
@@ -29,9 +32,11 @@ header {
     top: 0px;
     margin: 0;
     padding: 0;
+    z-index: 1;
 }
 
 html {
+    height: 100%;
     font-family:  "Rubik Dirt";
     scroll-behavior: smooth;
 }
@@ -55,8 +60,9 @@ h3 {
 }
 
 footer {
+
     margin: 0;
-    padding: 0;;
+    padding: 0;
 }
 
 img {
@@ -68,6 +74,10 @@ img {
 li {
     padding: 0;
     margin: 0;
+}
+
+main {
+    flex:1;
 }
 
 ul {
@@ -133,6 +143,73 @@ th {
 .block-main-ref:hover {
     background-color: #52c126;
     margin-top: 0;
+}
+
+.button-add {
+    display: block;
+    width: 100%;
+    background-color: rgb(250, 234, 214);
+    border-radius: 10%;
+    border: 3px solid black;
+}
+
+.button-add:hover {
+    background-color:  rgb(210, 197, 182);
+    border: 2px solid black;
+}
+
+.button-add:active {
+    background-color: gray;
+    color:  rgb(250, 234, 214);
+}
+
+.buttons-order-bottom {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.button-submit-order{
+    background-color: #0b990b;
+    width: 100%;
+    display: block;
+    margin:1%;
+    height: 3em;
+    align-content: center;
+    border:3px solid #000000;
+    color:antiquewhite;
+}
+
+.button-submit-order:hover {
+    background-color: #52c126;
+    border:2px solid #000000;
+}
+
+.button-view-order{
+    width: 100%;
+    background-color: #0b990b;
+    display: block;
+    margin:1%;
+    height: 3em;
+    align-content: center;
+    border:3px solid #000000;
+    color:antiquewhite;
+}
+
+.button-view-order:hover {
+    background-color: #52c126;
+    border:2px solid #000000;
+}
+
+.card-name {
+    height: 4em;
+}
+
+.close-button-order {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
 .close-button {
@@ -272,8 +349,8 @@ th {
 
 .login-header h2 {
     margin: 0;
-    
 }
+
 
 .name-mail-form {
     display: flex;
@@ -292,6 +369,7 @@ th {
     display: flex;
     list-style:  none;
     justify-content: space-around;
+    z-index: 0;
     
 }
 
@@ -321,34 +399,98 @@ th {
     margin-bottom: 5%;
 }
 
+.menu-flexes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .menu-images {
     margin-top: 1%;
     display:flex;
-    justify-content: space-around;
+    justify-content:space-around;
+    flex-wrap: wrap;
+}
+
+.menu-images img {
+    flex: 1;
+    width: 100%;
 }
 
 .menu-images img {
     border-radius: 10%;
 }
 
-
-
-
-.schedule-table {
-    margin: auto;
+.order-submit {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 50%;
+    transform: translateY(50%) translateX(50%);
+    bottom:50%;
+    right: 50%;;
+    min-width: 50%;
+    min-height: 70%;
+    position: fixed;
+    z-index: -1;
+    visibility: hidden;
+    background-color: rgb(233, 247, 174);
+    box-shadow: -2px 1px 5px 4px rgba(34, 60, 80, 0.6);
+    display: flex;
+    flex-direction: column ;
 }
 
-.table-articles {
-    padding-bottom: 15px;
-    padding-right: 15px;
-    text-align: left;
-}
-
-.text-about {
-    text-align: justify;
+.order-submit-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    text-indent: 5%;
+    height: 100%;
+}
+
+.order-submit-form label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2%
+}
+
+
+.order-submit-form h2 {
+    background-color:unset;
+    border:none;
+}
+
+.order-main-ref {
+    border:black;
+    border-width: 5px;
+    display:block;
+    background-color: yellowgreen;
+}
+
+.order-main-ref:hover {
+    background-color: #52c126;
+    margin-top: 0;
+}
+
+.order-header {
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0b990b;
+}
+
+
+
+.order-title {
+    border: none;
+    width: 100%;
+    background-color:unset;
+    color:antiquewhite;
+    text-shadow: 3px 2px black;
+    margin: 0;
 }
 
 .text-submit {
@@ -370,14 +512,44 @@ th {
     margin-left: 10%;
 }
 
+.product-card {
+    box-shadow: -1px 0px 5px 6px rgba(8, 129, 45, 0.31);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 10%;
+    background-color: #f1bd2e;
+    padding: 2%;
+    width: 20%;
+    margin: 4%;
+}
+
+.product-card img {
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+.product-card p {
+    padding: 1%;
+    margin: 0;
+    width: 100%;
+    text-align: center; 
+    
+}
+
+.product-card p a {
+    margin-top: 1em;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    z-index: 0;
+}
+
 #about {
     margin-top: 5%;
     padding: 0;
 }
 
 
-#schedule {
-    margin-bottom: 5%;
-    padding: 0;
-    text-align: center;
-}
+  

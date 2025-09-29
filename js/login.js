@@ -50,11 +50,8 @@ autocomplete_submit.addEventListener('click', function(event) {
     if (autocomplete_submit.checked === true) {
         loging_field.setAttribute("autocomplite", "on");
         password_field.setAttribute("autocomplite", "current-password");
-        enablePasswordSaving();
     } else {
-        loging_field.readonly = true;
         loging_field.setAttribute("autocompite", "off");
         password_field.setAttribute("autocomplite", "new-password");
-        disablePasswordSaving();
     }
 })
