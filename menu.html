@@ -82,6 +82,7 @@
                 size="20"
                 type="text" 
                 placeholder="Введите ФИО"
+                name ="full_name"
                 >
             </label>
             <label>
@@ -92,6 +93,7 @@
                 type = "email"
                 placeholder="email"
                 size="20"
+                name="email"
                 required
                 >
             </label>
@@ -104,6 +106,7 @@
                 size="20"
                 type="tel" 
                 placeholder="+7 (000)-000-00-00"
+                name ="phone"
                 >
             </label>
             <label>
@@ -115,6 +118,7 @@
                 size="20"
                 type="text" 
                 placeholder="г. Москва, ул.Ленинаб д.81, кв. 7"
+                name="address"
                 >
             </label>
             <div class = "buttons-order-bottom">
@@ -125,7 +129,28 @@
                     Заказать
                 </a>
             </div>
-            
+
+
+<div class="order-modal-overlay" style="display: none;">
+    <div class="order-modal">
+        <div class="order-modal-header">
+            <h2>Ваш заказ</h2>
+            <button class="close-order-modal">×</button>
+        </div>
+        <div class="order-modal-content">
+            <div class="order-items-list" id="order-items-list">
+                <!-- Список блюд будет здесь -->
+            </div>
+            <div class="order-total">
+                <strong>Итого: </strong>
+                <span id="modal-total-price">0</span> р.
+            </div>
+        </div>
+        <div class="order-modal-footer">
+            <button class="continue-shopping-btn">Продолжить покупки</button>
+        </div>
+    </div>
+</div>
             
 
     </form>
@@ -139,7 +164,8 @@
     Меню
 </h2>
 
-
+<div class = "menu-container"> </div>
+<!--
 <section class = "menu-flexes">
     <h3>
         Супы
@@ -230,7 +256,7 @@
 
     </div>
 </section>
-
+-->
 <form method="post", action = "https://httpbin.org/post">
     <div class = "feedback-form">
         <div class = "login-header">
@@ -351,8 +377,11 @@
 
 
 
- <script src = "js/login.js"></script>
- <script src = "js/order_submit.js"></script>
+<script src = "js/login.js"></script>
+<script src = "js/order_submit.js"></script>
+<script src="js/dishes_info.js"></script>
+<script src="js/dishes_display.js"></script>
+<script src ="js/order_collection.js"></script>
 
 </body>
 

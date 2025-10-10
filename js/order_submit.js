@@ -12,3 +12,4 @@ let close_button_order = document.getElementsByClassName("close-button-order")[0
 close_button_order.addEventListener('click', function(event) {
     order_submit.style.cssText = "z-index:0; visibility: hidden";
 })
+

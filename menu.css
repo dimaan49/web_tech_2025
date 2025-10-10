@@ -223,10 +223,44 @@ th {
     width: 40px;
     height: 40px;
 }
+ .close-order-modal {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
 
 .container-submit-text {
     justify-content: space-around;
     display: flex;
+}
+
+.continue-shopping-btn, .submit-order-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.continue-shopping-btn:hover {
+    background-color: #545b62;
+}
+
+.continue-shopping-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.empty-order-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
 }
 
 .complience {
@@ -242,6 +276,21 @@ th {
     justify-content: flex-start;
 }
 
+.decrease-btn, .increase-btn {
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    background-color: #f1bd2e;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.decrease-btn:hover, .increase-btn:hover {
+    background-color: #de8d14;
+}
 
 .entering-fileds-log {
     display: flex;
@@ -423,6 +472,32 @@ th {
     border-radius: 10%;
 }
 
+
+.modal-decrease-btn, .modal-increase-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.modal-remove-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ff4444;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.modal-quantity {
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+}
 .order-submit {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 50%;
@@ -482,6 +557,91 @@ th {
     background-color: #0b990b;
 }
 
+ .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f8f8;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.order-item-info {
+    flex: 1;
+}
+
+.order-item-name {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.order-item-price {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.order-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.order-modal {
+    background-color: rgb(234, 229, 167);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ .order-modal-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.order-modal-header {
+    background-color: #0b990b;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-modal-header h2 {
+    margin: 0;
+    border: none;
+    background: none;
+    text-shadow: 2px 2px black;
+}
+
+.order-items-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+       
+
+.order-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
 
 
 .order-title {
@@ -492,6 +652,23 @@ th {
     text-shadow: 3px 2px black;
     margin: 0;
 }
+
+.order-modal-footer {
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 10px;
+    border-top: 2px solid #ccc;
+}
+
+
 
 .text-submit {
     font-size: 100%;
@@ -544,6 +721,27 @@ th {
 .product-card:hover {
     transform: translateY(-5px);
     z-index: 0;
+}
+.submit-order-btn {
+    background-color: #0b990b;
+    color: white;
+}
+
+.submit-order-btn:hover {
+    background-color: #52c126;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+.quantity-display {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
 }
 
 #about {
