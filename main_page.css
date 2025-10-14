@@ -322,9 +322,11 @@ th {
 }
 
 .menu-images {
-    margin-top: 1%;
-    display:flex;
-    justify-content: space-around;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .menu-images img {

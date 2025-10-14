@@ -164,99 +164,68 @@
     Меню
 </h2>
 
-<div class = "menu-container"> </div>
-<!--
-<section class = "menu-flexes">
-    <h3>
-        Супы
-    </h3>
-    <div class = "menu-images">
-        <div class = "product-card">
-            <img src = "images/борщ.jpg", alt ="борщ">
-            <p>180 р.</p>
-            <p class = "card-name">Борщ</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
+<div class="menu-container">
+
+    <section class="menu-flexes" data-category="soup">
+        <h3>Супы</h3>
+        <div class="category-filters">
+            <button class="filter-btn" data-category="soup" data-kind="fish">рыбный</button>
+            <button class="filter-btn" data-category="soup" data-kind="meat">мясной</button>
+            <button class="filter-btn" data-category="soup" data-kind="veg">вегетарианский</button>
         </div>
-        <div class = "product-card">
-            <img src = "images/рассольник_скурицей.jpeg", alt = "рассольник с курицей"> 
-            <p>180 р.</p> 
-            <p class = "card-name">рассольник с курицей</p> 
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
+        <div class="menu-images" data-category-items="soup">
+
         </div>
-        <div class = "product-card">
-            <img src = "images/суп картофельный.jpg", alt = "курица с запеченной картошкой">
-            <p>180 р.</p>
-            <p class = "card-name">Суп картофельный</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
+    </section>
+
+    <section class="menu-flexes" data-category="main">
+        <h3>Вторые блюда</h3>
+        <div class="category-filters">
+            <button class="filter-btn" data-category="main" data-kind="fish">рыбное</button>
+            <button class="filter-btn" data-category="main" data-kind="meat">мясное</button>
+            <button class="filter-btn" data-category="main" data-kind="veg">вегетарианское</button>
         </div>
-        <div class = "product-card">
-            <img src = "images/суп_солянка.jpg", alt = "Суп солянка">
-            <p>180 р.</p>
-            <p class = "card-name">Суп солянка</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
+        <div class="menu-images" data-category-items="main">
+
         </div>
-    </div>
-</section>
+    </section>
 
 
+    <section class="menu-flexes" data-category="starter">
+        <h3>Салаты и стартеры</h3>
+        <div class="category-filters">
+            <button class="filter-btn" data-category="starter" data-kind="fish">рыбный</button>
+            <button class="filter-btn" data-category="starter" data-kind="meat">мясной</button>
+            <button class="filter-btn" data-category="starter" data-kind="veg">вегетарианский</button>
+        </div>
+        <div class="menu-images" data-category-items="starter">
 
-<section class = "menu-flexes">
-    <h3>
-        Вторые блюда
-    </h3>
-    <div class = "menu-images">
-        <div class = "product-card">
-            <img src = "images/макароны с мясом.jpg", alt ="макароны с мясом">
-            <p>180 р.</p>
-            <p class = "card-name">Макароны с мясом</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
         </div>
-        <div class = "product-card">
-            <img src = "images/рыба с картошкой.jpg", alt = "Картошка с рыбой"> 
-            <p>180 р.</p> 
-            <p class = "card-name">Картошка с рыбой</p> 
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
-        </div>
-        <div class = "product-card">
-            <img src = "images/курица с картошкой.jpg", alt = "курица с запеченной картошкой">
-            <p>180 р.</p>
-            <p class = "card-name">Курица с запеченной картошкой</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
-        </div>
-        <div class = "product-card">
-            <img src = "images/рыба_лимон.jpg", alt = "рыба с лимоном">
-            <p>180 р.</p>
-            <p class = "card-name">Рыба с лимоном</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
-        </div>
-        <div class = "product-card">
-            <img src = "images/рыба_рис.jpg", alt = "рыба с рисом">
-            <p>180 р.</p>
-            <p class = "card-name">Рыба с рисом</p>
-            <p>
-                <a class="button-add">Добавить</a>
-            </p>
-        </div>
+    </section>
 
-    </div>
-</section>
--->
+    <section class="menu-flexes" data-category="drink">
+        <h3>Напитки</h3>
+        <div class="category-filters">
+            <button class="filter-btn" data-category="drink" data-kind="cold">холодный</button>
+            <button class="filter-btn" data-category="drink" data-kind="hot">горячий</button>
+        </div>
+        <div class="menu-images" data-category-items="drink">
+        </div>
+    </section>
+
+
+    <section class="menu-flexes" data-category="dessert">
+        <h3>Десерты</h3>
+        <div class="category-filters">
+            <button class="filter-btn" data-category="dessert" data-kind="small">маленькая порция</button>
+            <button class="filter-btn" data-category="dessert" data-kind="medium">средняя порция</button>
+            <button class="filter-btn" data-category="dessert" data-kind="large">большая порция</button>
+        </div>
+        <div class="menu-images" data-category-items="dessert">
+        </div>
+    </section>
+</div>
+
 <form method="post", action = "https://httpbin.org/post">
     <div class = "feedback-form">
         <div class = "login-header">
