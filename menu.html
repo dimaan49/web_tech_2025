@@ -139,7 +139,6 @@
         </div>
         <div class="order-modal-content">
             <div class="order-items-list" id="order-items-list">
-                <!-- Список блюд будет здесь -->
             </div>
             <div class="order-total">
                 <strong>Итого: </strong>
@@ -156,9 +155,91 @@
     </form>
 </section>
 
+<div class="discount-modal-overlay">
+    <div class="discount-modal">
+        <div class="discount-modal-header">
+            <h2>🎉 Поздравляем!</h2>
+        </div>
+        <div class="discount-modal-content">
+            <p>Вы собрали комбо-ланч и получаете <strong>10% скидку</strong>!</p>
+            <p class="discount-details">Скидка будет автоматически применена к вашему заказу.</p>
+        </div>
+        <div class="discount-modal-footer">
+            <button class="discount-ok-btn">Хорошо!</button>
+        </div>
+    </div>
+</div>
+
 <h1 class = "main_header">
     Launch time
 </h1>
+
+    <div class="combo-grid">
+        <div class="combo-card" data-combo="1">
+             <p class="combo-name">Полный обед</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="soup">🥣</div>
+                <div class="combo-icon" data-type="main">🍽️</div>
+                <div class="combo-icon" data-type="starter">🥗</div>
+                <div class="combo-icon" data-type="drink">🥤</div>
+            </div>
+        </div>
+
+
+        <div class="combo-card" data-combo="2">
+              <p class="combo-name">Основной обед</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="soup">🥣</div>
+                <div class="combo-icon" data-type="main">🍽️</div>
+                <div class="combo-icon" data-type="drink">🥤</div>
+            </div>
+        
+        </div>
+
+        <div class="combo-card" data-combo="3">
+             <p class="combo-name">Легкий обед</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="soup">🥣</div>
+                <div class="combo-icon" data-type="starter">🥗</div>
+                <div class="combo-icon" data-type="drink">🥤</div>
+            </div>
+           
+        </div>
+
+
+        <div class="combo-card" data-combo="4">
+            <p class="combo-name">Без супа</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="main">🍽️</div>
+                <div class="combo-icon" data-type="starter">🥗</div>
+                <div class="combo-icon" data-type="drink">🥤</div>
+            </div>
+            
+        </div>
+
+
+        <div class="combo-card" data-combo="5">
+             <p class="combo-name">Мини-ланч</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="main">🍽️</div>
+                <div class="combo-icon" data-type="drink">🥤</div>
+            </div>
+           
+        </div>
+
+
+        <div class="combo-card combo-dessert" data-combo="6">
+            <p class="combo-name">Десерт</p>
+            <p class="combo-note">Можно добавить к любому заказу</p>
+            <div class="combo-icons">
+                <div class="combo-icon" data-type="dessert">🍰</div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
 
 <h2 id = "menu", class = "menu-header"> 
     Меню
@@ -351,6 +432,8 @@
 <script src="js/dishes_info.js"></script>
 <script src="js/dishes_display.js"></script>
 <script src ="js/order_collection.js"></script>
+<script src="js/discount_check.js"></script>
+<script src="js/discount_modal.js"></script>
 
 </body>
 
