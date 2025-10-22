@@ -95,6 +95,22 @@ th {
     margin-bottom: 30px;
 }
 
+.about-menu {
+    width:60%;
+    margin-left: 20%;
+}
+
+.about-menu p {
+    text-align: justify;
+    text-indent:5%;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.about-menu li {
+    list-style-type: '⚡ ';
+}
+
 .appeal-type {
     display: flex;
     flex-direction: column;
@@ -382,6 +398,7 @@ th {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 .decrease-btn:hover, .increase-btn:hover {
     background-color: #de8d14;
@@ -673,6 +690,7 @@ th {
     border-radius: 3px;
     cursor: pointer;
     margin-left: 5px;
+    flex-shrink: 0;
 }
 
 .modal-quantity {
@@ -748,16 +766,19 @@ th {
     background-color: #f8f8f8;
     margin-bottom: 5px;
     border-radius: 5px;
+    gap: 10px;
 }
 
 .order-item-info {
     flex: 1;
+    min-width: 0;
 }
 
 .order-item-name {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    word-wrap: break-word;
 }
 
 .order-item-price {
@@ -769,6 +790,9 @@ th {
     display: flex;
     align-items: center;
     gap: 5px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    margin-top:1em;
 }
 
 .order-modal {
@@ -918,6 +942,7 @@ th {
     justify-content: center;
     gap: 10px;
     width: 100%;
+    margin-top: 1em;
 }
 .quantity-display {
     font-weight: bold;

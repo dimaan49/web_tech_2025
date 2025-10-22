@@ -1,3 +1,5 @@
+// short file modal win
+// if active combo -> show discount modal, if zero -> message. send the form
 function handleFormSubmit(event) {
     const activeCombo = checkForComboDiscount();
     

@@ -32,7 +32,7 @@ close_button_feedback.addEventListener('click', function(event) {
 let autocomplete_submit = document.getElementsByClassName('autocomplete-submit')[0];
 let loging_field = document.getElementsByClassName('login-field')[0];
 let password_field = document.getElementsByClassName('password-field')[0];
-//alert (autocomplete_submit.checked = true);
+
 password_field.addEventListener('focus', function(event){
     password_field.setAttribute("type", "text");
 })

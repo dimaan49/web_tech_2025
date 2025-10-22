@@ -1,8 +1,68 @@
 let dishesCollection = [];
 let isOrderModalOpen = false;
 
+function saveDishesToLocalStorage() {
+    const simplifiedCollection = dishesCollection.map(dish => ({
+        keyword: dish.keyword,
+        quantity: dish.quantity
+    }));
+    
+    localStorage.setItem('dishesCollection', JSON.stringify(simplifiedCollection));
+}
+
+function loadDishesFromLocalStorage() {
+    const saved = localStorage.getItem('dishesCollection');
+    
+    if (saved) {
+        try {
+            const simplifiedCollection = JSON.parse(saved);
+            
+            dishesCollection = simplifiedCollection.map(item => {
+                const dish = window.dishes.find(d => d.keyword === item.keyword);
+                return dish ? { ...dish, quantity: item.quantity } : null;
+            }).filter(item => item !== null);
+            
+            updateAllDishCards();
+            
+        } catch (error) {
+            console.error('Ошибка загрузки корзины:', error);
+            dishesCollection = [];
+        }
+    }
+}
+
+window.restoreCartAfterAPILoad = function() {
+    if (typeof window.dishes !== 'undefined' && window.dishes.length > 0) {
+        loadDishesFromLocalStorage();
+    }
+};
+
+function clearDishesFromLocalStorage() {
+    localStorage.removeItem('dishesCollection');
+}
+
+function initializeAfterAPILoad() {
+    if (typeof window.dishes !== 'undefined' && window.dishes.length > 0) {
+        loadDishesFromLocalStorage();
+    } else {
+        setTimeout(initializeAfterAPILoad, 500);
+    }
+}
+
+function triggerDishesCollectionUpdate() {
+    const event = new CustomEvent('dishesCollectionUpdated');
+    document.dispatchEvent(event);
+}
+
+function updateAllDishCards() {
+    dishesCollection.forEach(dish => {
+        updateDishCardDisplay(dish.keyword);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeOrderFunctionality();
+    initializeAfterAPILoad();
 });
 
 function initializeOrderFunctionality() {
@@ -87,7 +147,7 @@ function initializeOrderFunctionality() {
 }
 
 function addDishToOrder(dishKeyword) {
-    const dish = dishes.find(d => d.keyword === dishKeyword);
+    const dish = window.dishes.find(d => d.keyword === dishKeyword);
     if (!dish) return;
     
     const existingDish = dishesCollection.find(item => item.keyword === dishKeyword);
@@ -102,6 +162,7 @@ function addDishToOrder(dishKeyword) {
     }
     
     updateDishCardDisplay(dishKeyword);
+    saveDishesToLocalStorage();
     triggerDishesCollectionUpdate();
 }
 
@@ -117,6 +178,7 @@ function decreaseDishQuantity(dishKeyword) {
         }
         
         updateDishCardDisplay(dishKeyword);
+        saveDishesToLocalStorage();
         if (isOrderModalOpen) updateOrderModal();
     }
 }
@@ -127,6 +189,7 @@ function increaseDishQuantity(dishKeyword) {
     if (dishIndex !== -1) {
         dishesCollection[dishIndex].quantity += 1;
         updateDishCardDisplay(dishKeyword);
+        saveDishesToLocalStorage();
         if (isOrderModalOpen) updateOrderModal();
     }
 }
@@ -134,7 +197,9 @@ function increaseDishQuantity(dishKeyword) {
 function removeDishFromOrder(dishKeyword) {
     dishesCollection = dishesCollection.filter(item => item.keyword !== dishKeyword);
     updateDishCardDisplay(dishKeyword);
+    saveDishesToLocalStorage();
     triggerDishesCollectionUpdate();
+    
     if (isOrderModalOpen) updateOrderModal();
 }
 
@@ -231,7 +296,9 @@ function fillOrderForm() {
     const orderedDishes = {
         soup: [],
         main: [],
-        drink: []
+        drink: [],
+        starter: [],
+        dessert: []
     };
     
     dishesCollection.forEach(dish => {
@@ -245,7 +312,7 @@ function fillOrderForm() {
     const orderForm = document.querySelector('.order-submit-form');
     if (!orderForm) return;
     
-    document.querySelectorAll('input[name^="soup_"], input[name^="main_"], input[name^="drink_"], input[name$="_count"], input[name="order_info"]').forEach(input => {
+    document.querySelectorAll('input[name^="soup_"], input[name^="main_"], input[name^="drink_"], input[name^="starter_"], input[name^="dessert_"], input[name$="_count"], input[name="order_info"]').forEach(input => {
         input.remove();
     });
     
@@ -288,4 +355,9 @@ function closeOrderForm() {
         orderSubmitSection.style.visibility = 'hidden';
         orderSubmitSection.style.zIndex = '-1';
     }
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    console.log('Форма отправлена', dishesCollection);
 }

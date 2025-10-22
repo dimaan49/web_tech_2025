@@ -1,13 +1,90 @@
+// file with show all dishes and functionality of filters
+window.dishes = [];
+
+async function loadDishes() {
+    const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    
+    try {
+        console.log('Попытка загрузки данных с API...');
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const apiDishes = await response.json();
+        console.log('Данные успешно загружены с API:', apiDishes);
+        
+        window.dishes = apiDishes.map(dish => {
+            let category;
+            switch(dish.category) {
+                case 'main-course':
+                    category = 'main';
+                    break;
+                case 'salad':
+                    category = 'starter';
+                    break;
+                default:
+                    category = dish.category; 
+            }
+            
+            let image = dish.image;
+            if (image && !image.startsWith('http')) {
+                image = `https://edu.std-900.ist.mospolytech.ru${image}`;
+            }
+            
+            return {
+                keyword: dish.keyword,
+                name: dish.name,
+                price: dish.price,
+                category: category, 
+                count: dish.count,
+                image: image, 
+                kind: dish.kind
+            };
+        });
+        
+        console.log('Данные преобразованы к нашему формату:', window.dishes);
+        
+    } catch (error) {
+        console.warn('Ошибка загрузки с API, используем локальные данные:', error);
+        
+        if (!window.dishes || window.dishes.length === 0) {
+            console.error('Локальные данные также недоступны');
+            window.dishes = [];
+        }
+    }
+}
+
+// main
+async function initializeApp() {
+    await loadDishes(); 
+    displayDishes();    
+    initializeFilters(); 
+
+    console.log('🔄 Вызываем восстановление корзины...');
+    if (typeof window.restoreCartAfterAPILoad === 'function') {
+        window.restoreCartAfterAPILoad();
+    } else {
+        console.log('⚠️ Функция restoreCartAfterAPILoad не найдена');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    displayDishes();
-    initializeFilters();
+    console.log('🏠 DOM загружен, инициализируем приложение...');
+    initializeApp();
 });
 
 function displayDishes() {
-    // Сортируем блюда по названию в алфавитном порядке
-    const sortedDishes = dishes.sort((a, b) => a.name.localeCompare(b.name));
+    if (!window.dishes || window.dishes.length === 0) {
+        console.error('Нет данных о блюдах для отображения');
+        return;
+    }
     
-    // Группируем блюда по категориям
+    // sort
+    const sortedDishes = window.dishes.sort((a, b) => a.name.localeCompare(b.name));
+    
+    // by category
     const dishesByCategory = {};
     sortedDishes.forEach(dish => {
         if (!dishesByCategory[dish.category]) {
@@ -16,14 +93,12 @@ function displayDishes() {
         dishesByCategory[dish.category].push(dish);
     });
     
-    // Создаем карточки для каждой категории
+    // create cards
     Object.keys(dishesByCategory).forEach(category => {
         const categoryContainer = document.querySelector(`[data-category-items="${category}"]`);
         if (categoryContainer) {
-            // Очищаем контейнер
             categoryContainer.innerHTML = '';
-            
-            // Создаем карточки для каждого блюда
+
             dishesByCategory[category].forEach(dish => {
                 const dishCard = createDishCard(dish);
                 categoryContainer.appendChild(dishCard);
@@ -33,7 +108,7 @@ function displayDishes() {
     
     console.log('Dishes displayed successfully');
 }
-
+// create card function
 function createDishCard(dish) {
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -53,7 +128,7 @@ function createDishCard(dish) {
     return card;
 }
 
-// Функционал фильтрации
+// filters
 function initializeFilters() {
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('filter-btn')) {
@@ -67,23 +142,22 @@ function initializeFilters() {
 }
 
 function toggleFilter(button, category, kind) {
-    // Проверяем, активен ли уже этот фильтр
     const isActive = button.classList.contains('active');
     
-    // Снимаем активность со всех фильтров этой категории
     document.querySelectorAll(`.filter-btn[data-category="${category}"]`).forEach(btn => {
         btn.classList.remove('active');
     });
     
     if (!isActive) {
-        // Активируем фильтр
+       
         button.classList.add('active');
         filterDishesByKind(category, kind);
     } else {
-        // Показываем все блюда категории
+       
         showAllDishes(category);
     }
 }
+
 
 function filterDishesByKind(category, kind) {
     const categoryContainer = document.querySelector(`[data-category-items="${category}"]`);

@@ -26,10 +26,13 @@ function updateComboIndicators() {
         icon.classList.remove('active');
     });
     
+    
     document.querySelectorAll('.combo-card').forEach(card => {
         const comboId = card.getAttribute('data-combo');
         const icons = card.querySelectorAll('.combo-icon');
         let allIconsActive = true;
+
+        
         
         icons.forEach(icon => {
             const type = icon.getAttribute('data-type');
