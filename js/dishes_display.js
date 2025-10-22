@@ -50,8 +50,7 @@ async function loadDishes() {
         console.warn('Ошибка загрузки с API, используем локальные данные:', error);
         
         if (!window.dishes || window.dishes.length === 0) {
-            console.error('Локальные данные также недоступны');
-            window.dishes = [];
+            window.dishes = dishes;
         }
     }
 }
