@@ -1,6 +1,11 @@
 let dishesCollection = [];
 let isOrderModalOpen = false;
 
+function triggerDishesCollectionUpdate() {
+    const event = new CustomEvent('dishesCollectionUpdated');
+    document.dispatchEvent(event);
+}
+
 function saveDishesToLocalStorage() {
     const simplifiedCollection = dishesCollection.map(dish => ({
         keyword: dish.keyword,
@@ -115,6 +120,7 @@ function addDishToOrder(dishKeyword) {
 
     updateDishCardDisplay(dishKeyword);
     saveDishesToLocalStorage();
+    triggerDishesCollectionUpdate();
 }
 
 function decreaseDishQuantity(dishKeyword) {
@@ -145,6 +151,7 @@ function removeDishFromOrder(dishKeyword) {
     dishesCollection = dishesCollection.filter(item => item.keyword !== dishKeyword);
     updateDishCardDisplay(dishKeyword);
     saveDishesToLocalStorage();
+    triggerDishesCollectionUpdate();
     if (isOrderModalOpen) updateOrderModal();
 }
 
@@ -264,7 +271,7 @@ function submitOrderForm() {
     
     localStorage.setItem('userOrders', JSON.stringify(orders));
     
-
+    // Очищаем корзину после успешного заказа
     dishesCollection = [];
     clearDishesFromLocalStorage();
     updateOrderModal();
@@ -280,7 +287,7 @@ function calculateTotalPrice() {
     return dishesCollection.reduce((total, dish) => total + (dish.price * dish.quantity), 0);
 }
 
-
+// Инициализация
 document.addEventListener('DOMContentLoaded', function() {
     initializeOrderFunctionality();
     initializeAfterAPILoad();
