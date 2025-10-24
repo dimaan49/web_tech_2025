@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchTime - Бизнес-ланчи с доставкой</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0b990b;
+            --secondary-color: #deac14;
+            --accent-color: #f1bd2e;
+            --background-color: rgb(234, 229, 167);
+        }
+        
+        body {
+            font-family: 'Rubik Dirt', cursive;
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-shadow: 3px 3px 0px black;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .cta-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            text-shadow: 2px 2px 0px black;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-custom {
+            background: var(--secondary-color);
+            border: 3px solid black;
+            color: black;
+            font-weight: bold;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: #52c126;
+            transform: scale(1.05);
+            border: 2px solid black;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .form-control {
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(222, 172, 20, 0.25);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-shadow: 2px 2px 0px black;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid black;
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .navbar-custom {
+            background-color: var(--background-color);
+            border-bottom: 3px solid black;
+        }
+        
+        .nav-link {
+            color: black !important;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 10px 20px !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        .footer-custom {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            border-top: 3px solid black;
+        }
+        
+        .food-image {
+            border-radius: 20px;
+            border: 3px solid black;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1.2rem;
+            }
+            
+            .feature-card {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#" style="color: var(--primary-color); text-shadow: 2px 2px 0px black;">
+                🚀 LaunchTime
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cta">Собрать ланч</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">Меню</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Запускаем ваш вкус!</h1>
+                    <p class="lead">Свежие бизнес-ланчи с доставкой прямо в офис. Вкусно, быстро и по-технологичному!</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#cta" class="btn btn-custom btn-lg">Собрать ланч</a>
+                        <a href="menu.html" class="btn btn-outline-dark btn-lg">Посмотреть меню</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Вкусный бизнес-ланч" class="img-fluid food-image mt-4 mt-lg-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Почему выбирают LaunchTime?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Молниеносная доставка</h4>
+                        <p>Доставляем за 30 минут или быстрее. Ваш обед всегда горячий и свежий!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Технологичный подход</h4>
+                        <p>Умная система сборки ланчей и отслеживания заказов в реальном времени</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🍽️</div>
+                        <h4>Сбалансированное питание</h4>
+                        <p>Питательные блюда от шеф-повара для продуктивного рабочего дня</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4>Выгодные комбо</h4>
+                        <p>Собирайте комбо-ланчи и получайте скидки до 20% на заказы</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌱</div>
+                        <h4>Свежие продукты</h4>
+                        <p>Только свежие ингредиенты от проверенных поставщиков каждый день</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏢</div>
+                        <h4>Для бизнеса</h4>
+                        <p>Специальные условия для корпоративных клиентов и регулярных заказов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta-section text-center">
+        <div class="container">
+            <h2>Готовы запустить свой обед?</h2>
+            <p class="fs-5 mb-4">Соберите идеальный бизнес-ланч всего в несколько кликов</p>
+            <a href="menu.html" class="btn btn-custom btn-lg">Собрать ланч сейчас</a>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center section-title">Свяжитесь с нами</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <h4>📞 Телефон</h4>
+                                <p class="fs-5">7 (965) 965-65-56</p>
+                            </div>
+                            <div class="mb-4">
+                                <h4>📧 Email</h4>
+                                <p class="fs-5">LaunchTime@gmail.com</p>
+                            </div>
+                            <div class="mb-4">
+                                <h4>🕒 Время работы</h4>
+                                <p class="fs-5">Пн-Пт: 8:00-18:00<br>Сб-Вс: 9:00-16:00</p>
+                            </div>
+                            <div class="mb-4">
+                                <h4>📍 Зона доставки</h4>
+                                <p class="fs-5">Весь город и пригород</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Ваш email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" placeholder="Ваш телефон">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="4" placeholder="Ваше сообщение" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-custom w-100">Отправить сообщение</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-custom text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>🚀 LaunchTime</h5>
+                    <p>Бизнес-ланчи с доставкой<br>Запускаем ваш вкус!</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Быстрые ссылки</h5>
+                    <a href="menu.html" class="text-white d-block">Меню</a>
+                    <a href="#features" class="text-white d-block">Преимущества</a>
+                    <a href="#contact" class="text-white d-block">Контакты</a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Мы в соцсетях</h5>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="text-white">📘 VK</a>
+                        <a href="#" class="text-white">📷 Instagram</a>
+                        <a href="#" class="text-white">📱 Telegram</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: white;">
+            <p>&copy; 2025 LaunchTime. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
