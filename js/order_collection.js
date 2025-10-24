@@ -6,36 +6,25 @@ function saveDishesToLocalStorage() {
         keyword: dish.keyword,
         quantity: dish.quantity
     }));
-    
     localStorage.setItem('dishesCollection', JSON.stringify(simplifiedCollection));
 }
 
 function loadDishesFromLocalStorage() {
     const saved = localStorage.getItem('dishesCollection');
-    
-    if (saved) {
-        try {
-            const simplifiedCollection = JSON.parse(saved);
-            
-            dishesCollection = simplifiedCollection.map(item => {
-                const dish = window.dishes.find(d => d.keyword === item.keyword);
-                return dish ? { ...dish, quantity: item.quantity } : null;
-            }).filter(item => item !== null);
-            
-            updateAllDishCards();
-            
-        } catch (error) {
-            console.error('Ошибка загрузки корзины:', error);
-            dishesCollection = [];
-        }
+    if (!saved) return;
+
+    try {
+        const simplifiedCollection = JSON.parse(saved);
+        dishesCollection = simplifiedCollection.map(item => {
+            const dish = window.dishes.find(d => d.keyword === item.keyword);
+            return dish ? { ...dish, quantity: item.quantity } : null;
+        }).filter(item => item !== null);
+        updateAllDishCards();
+    } catch (error) {
+        console.error('Ошибка загрузки корзины:', error);
+        dishesCollection = [];
     }
 }
-
-window.restoreCartAfterAPILoad = function() {
-    if (typeof window.dishes !== 'undefined' && window.dishes.length > 0) {
-        loadDishesFromLocalStorage();
-    }
-};
 
 function clearDishesFromLocalStorage() {
     localStorage.removeItem('dishesCollection');
@@ -49,167 +38,123 @@ function initializeAfterAPILoad() {
     }
 }
 
-function triggerDishesCollectionUpdate() {
-    const event = new CustomEvent('dishesCollectionUpdated');
-    document.dispatchEvent(event);
-}
-
 function updateAllDishCards() {
     dishesCollection.forEach(dish => {
         updateDishCardDisplay(dish.keyword);
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeOrderFunctionality();
-    initializeAfterAPILoad();
-});
-
 function initializeOrderFunctionality() {
     document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('button-add')) {
-            const dishCard = event.target.closest('.product-card');
-            const dishKeyword = dishCard.getAttribute('data-dish');
+        const target = event.target;
+        const dishCard = target.closest('.product-card');
+        const dishKeyword = dishCard?.getAttribute('data-dish');
+
+        if (target.classList.contains('button-add') && dishKeyword) {
             addDishToOrder(dishKeyword);
-        }
-        
-        if (event.target.classList.contains('decrease-btn')) {
-            const dishCard = event.target.closest('.product-card');
-            const dishKeyword = dishCard.getAttribute('data-dish');
+        } else if (target.classList.contains('decrease-btn') && dishKeyword) {
             decreaseDishQuantity(dishKeyword);
-        }
-        
-        if (event.target.classList.contains('increase-btn')) {
-            const dishCard = event.target.closest('.product-card');
-            const dishKeyword = dishCard.getAttribute('data-dish');
+        } else if (target.classList.contains('increase-btn') && dishKeyword) {
             increaseDishQuantity(dishKeyword);
-        }
-        
-        if (event.target.classList.contains('button-view-order')) {
+        } else if (target.classList.contains('button-view-order')) {
             event.preventDefault();
             toggleOrderModal();
-        }
-        
-        if (event.target.classList.contains('modal-decrease-btn')) {
-            const dishItem = event.target.closest('.order-item');
-            const dishKeyword = dishItem.getAttribute('data-dish');
-            decreaseDishQuantity(dishKeyword);
-            updateOrderModal();
-        }
-        
-        if (event.target.classList.contains('modal-increase-btn')) {
-            const dishItem = event.target.closest('.order-item');
-            const dishKeyword = dishItem.getAttribute('data-dish');
-            increaseDishQuantity(dishKeyword);
-            updateOrderModal();
-        }
-        
-        if (event.target.classList.contains('modal-remove-btn')) {
-            const dishItem = event.target.closest('.order-item');
-            const dishKeyword = dishItem.getAttribute('data-dish');
-            removeDishFromOrder(dishKeyword);
-            updateOrderModal();
-        }
-        
-        if (event.target.classList.contains('close-order-modal') || 
-            event.target.classList.contains('order-modal-overlay')) {
-            closeOrderModal();
-        }
-        
-        if (event.target.classList.contains('submit-order-btn')) {
-            event.preventDefault();
-            submitOrder();
-        }
-        
-        if (event.target.classList.contains('continue-shopping-btn')) {
-            event.preventDefault();
-            closeOrderModal();
-        }
-        
-        if (event.target.classList.contains('close-button-order')) {
-            closeOrderForm();
-        }
-        
-        if (event.target.classList.contains('button-submit-order')) {
-            event.preventDefault();
-            const orderForm = document.querySelector('.order-submit-form');
-            if (orderForm) {
-                const submitEvent = new Event('submit', { cancelable: true });
-                orderForm.dispatchEvent(submitEvent);
+        } else if (target.classList.contains('modal-decrease-btn')) {
+            const dishItem = target.closest('.order-item');
+            const modalDishKeyword = dishItem?.getAttribute('data-dish');
+            if (modalDishKeyword) {
+                decreaseDishQuantity(modalDishKeyword);
+                updateOrderModal();
             }
+        } else if (target.classList.contains('modal-increase-btn')) {
+            const dishItem = target.closest('.order-item');
+            const modalDishKeyword = dishItem?.getAttribute('data-dish');
+            if (modalDishKeyword) {
+                increaseDishQuantity(modalDishKeyword);
+                updateOrderModal();
+            }
+        } else if (target.classList.contains('modal-remove-btn')) {
+            const dishItem = target.closest('.order-item');
+            const modalDishKeyword = dishItem?.getAttribute('data-dish');
+            if (modalDishKeyword) {
+                removeDishFromOrder(modalDishKeyword);
+                updateOrderModal();
+            }
+        } else if (target.classList.contains('close-order-modal') || target.classList.contains('order-modal-overlay')) {
+            closeOrderModal();
+        } else if (target.classList.contains('continue-shopping-btn')) {
+            event.preventDefault();
+            closeOrderModal();
+        } else if (target.classList.contains('close-button-order')) {
+            closeOrderForm();
+        } else if (target.classList.contains('button-submit-order')) {
+            event.preventDefault();
+            submitOrderForm();
         }
     });
-    
+
     const orderForm = document.querySelector('.order-submit-form');
     if (orderForm) {
-        orderForm.addEventListener('submit', handleFormSubmit);
+        orderForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            submitOrderForm();
+        });
     }
 }
 
 function addDishToOrder(dishKeyword) {
     const dish = window.dishes.find(d => d.keyword === dishKeyword);
     if (!dish) return;
-    
+
     const existingDish = dishesCollection.find(item => item.keyword === dishKeyword);
-    
     if (existingDish) {
         existingDish.quantity += 1;
     } else {
-        dishesCollection.push({
-            ...dish,
-            quantity: 1
-        });
+        dishesCollection.push({ ...dish, quantity: 1 });
     }
-    
+
     updateDishCardDisplay(dishKeyword);
     saveDishesToLocalStorage();
-    triggerDishesCollectionUpdate();
 }
 
 function decreaseDishQuantity(dishKeyword) {
     const dishIndex = dishesCollection.findIndex(item => item.keyword === dishKeyword);
-    
-    if (dishIndex !== -1) {
-        if (dishesCollection[dishIndex].quantity > 1) {
-            dishesCollection[dishIndex].quantity -= 1;
-        } else {
-            removeDishFromOrder(dishKeyword);
-            return;
-        }
-        
+    if (dishIndex === -1) return;
+
+    if (dishesCollection[dishIndex].quantity > 1) {
+        dishesCollection[dishIndex].quantity -= 1;
         updateDishCardDisplay(dishKeyword);
         saveDishesToLocalStorage();
         if (isOrderModalOpen) updateOrderModal();
+    } else {
+        removeDishFromOrder(dishKeyword);
     }
 }
 
 function increaseDishQuantity(dishKeyword) {
     const dishIndex = dishesCollection.findIndex(item => item.keyword === dishKeyword);
-    
-    if (dishIndex !== -1) {
-        dishesCollection[dishIndex].quantity += 1;
-        updateDishCardDisplay(dishKeyword);
-        saveDishesToLocalStorage();
-        if (isOrderModalOpen) updateOrderModal();
-    }
+    if (dishIndex === -1) return;
+
+    dishesCollection[dishIndex].quantity += 1;
+    updateDishCardDisplay(dishKeyword);
+    saveDishesToLocalStorage();
+    if (isOrderModalOpen) updateOrderModal();
 }
 
 function removeDishFromOrder(dishKeyword) {
     dishesCollection = dishesCollection.filter(item => item.keyword !== dishKeyword);
     updateDishCardDisplay(dishKeyword);
     saveDishesToLocalStorage();
-    triggerDishesCollectionUpdate();
-    
     if (isOrderModalOpen) updateOrderModal();
 }
 
 function updateDishCardDisplay(dishKeyword) {
     const dishCard = document.querySelector(`.product-card[data-dish="${dishKeyword}"]`);
     if (!dishCard) return;
-    
+
     const dishInOrder = dishesCollection.find(item => item.keyword === dishKeyword);
     const buttonContainer = dishCard.querySelector('p:last-child');
-    
+
     if (dishInOrder) {
         buttonContainer.innerHTML = `
             <div class="quantity-controls">
@@ -224,11 +169,7 @@ function updateDishCardDisplay(dishKeyword) {
 }
 
 function toggleOrderModal() {
-    if (isOrderModalOpen) {
-        closeOrderModal();
-    } else {
-        openOrderModal();
-    }
+    isOrderModalOpen ? closeOrderModal() : openOrderModal();
 }
 
 function openOrderModal() {
@@ -247,21 +188,20 @@ function closeOrderModal() {
 function updateOrderModal() {
     const orderItemsList = document.getElementById('order-items-list');
     const totalPriceElement = document.getElementById('modal-total-price');
-    
-    let totalPrice = 0;
-    
+
     if (dishesCollection.length === 0) {
         orderItemsList.innerHTML = '<p class="empty-order-message">Ваш заказ пуст</p>';
         totalPriceElement.textContent = '0';
         return;
     }
-    
+
     let orderItemsHTML = '';
-    
+    let totalPrice = 0;
+
     dishesCollection.forEach(dish => {
         const dishTotal = dish.price * dish.quantity;
         totalPrice += dishTotal;
-        
+
         orderItemsHTML += `
             <div class="order-item" data-dish="${dish.keyword}">
                 <div class="order-item-info">
@@ -277,68 +217,9 @@ function updateOrderModal() {
             </div>
         `;
     });
-    
+
     orderItemsList.innerHTML = orderItemsHTML;
     totalPriceElement.textContent = totalPrice;
-}
-
-function submitOrder() {
-    if (dishesCollection.length === 0) {
-        alert('Ваш заказ пуст!');
-        return;
-    }
-    fillOrderForm();
-    openOrderForm();
-    closeOrderModal();
-}
-
-function fillOrderForm() {
-    const orderedDishes = {
-        soup: [],
-        main: [],
-        drink: [],
-        starter: [],
-        dessert: []
-    };
-    
-    dishesCollection.forEach(dish => {
-        for (let i = 0; i < dish.quantity; i++) {
-            if (orderedDishes[dish.category]) {
-                orderedDishes[dish.category].push(dish.keyword);
-            }
-        }
-    });
-    
-    const orderForm = document.querySelector('.order-submit-form');
-    if (!orderForm) return;
-    
-    document.querySelectorAll('input[name^="soup_"], input[name^="main_"], input[name^="drink_"], input[name^="starter_"], input[name^="dessert_"], input[name$="_count"], input[name="order_info"]').forEach(input => {
-        input.remove();
-    });
-    
-    Object.keys(orderedDishes).forEach(category => {
-        orderedDishes[category].forEach((keyword, index) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `${category}_${index + 1}`;
-            input.value = keyword;
-            orderForm.appendChild(input);
-        });
-    });
-    
-    Object.keys(orderedDishes).forEach(category => {
-        const countInput = document.createElement('input');
-        countInput.type = 'hidden';
-        countInput.name = `${category}_count`;
-        countInput.value = orderedDishes[category].length;
-        orderForm.appendChild(countInput);
-    });
-    
-    const orderInfoInput = document.createElement('input');
-    orderInfoInput.type = 'hidden';
-    orderInfoInput.name = 'order_info';
-    orderInfoInput.value = JSON.stringify(dishesCollection);
-    orderForm.appendChild(orderInfoInput);
 }
 
 function openOrderForm() {
@@ -357,11 +238,6 @@ function closeOrderForm() {
     }
 }
 
-function handleFormSubmit(event) {
-    event.preventDefault();
-    console.log('Форма отправлена', dishesCollection);
-}
-
 function submitOrderForm() {
     if (dishesCollection.length === 0) {
         alert('Добавьте блюда в заказ перед отправкой!');
@@ -375,7 +251,7 @@ function submitOrderForm() {
         address: document.querySelector('input[name="address"]').value,
         deliveryType: 'asap',
         deliveryTime: new Date().toISOString(),
-        dishes: [...dishesCollection],
+        dishes: JSON.parse(JSON.stringify(dishesCollection)),
         totalPrice: calculateTotalPrice()
     };
 
@@ -388,19 +264,30 @@ function submitOrderForm() {
     
     localStorage.setItem('userOrders', JSON.stringify(orders));
     
+
     dishesCollection = [];
+    clearDishesFromLocalStorage();
     updateOrderModal();
+    updateAllDishCards();
     closeOrderForm();
     
-    alert('Заказ успешно оформлен!');
+    alert('Заказ успешно оформлен! Корзина очищена.');
     
-    return true;
-}
-function calculateTotalPrice() {
-    let total = 0;
-    dishesCollection.forEach(dish => {
-        total += dish.price * dish.quantity;
-    });
-    return total;
+    return false;
 }
 
+function calculateTotalPrice() {
+    return dishesCollection.reduce((total, dish) => total + (dish.price * dish.quantity), 0);
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeOrderFunctionality();
+    initializeAfterAPILoad();
+});
+
+window.restoreCartAfterAPILoad = function() {
+    if (typeof window.dishes !== 'undefined' && window.dishes.length > 0) {
+        loadDishesFromLocalStorage();
+    }
+};
