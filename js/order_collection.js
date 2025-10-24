@@ -361,3 +361,46 @@ function handleFormSubmit(event) {
     event.preventDefault();
     console.log('Форма отправлена', dishesCollection);
 }
+
+function submitOrderForm() {
+    if (dishesCollection.length === 0) {
+        alert('Добавьте блюда в заказ перед отправкой!');
+        return false;
+    }
+
+    const orderData = {
+        fullName: document.querySelector('input[name="full_name"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        phone: document.querySelector('input[name="phone"]').value,
+        address: document.querySelector('input[name="address"]').value,
+        deliveryType: 'asap',
+        deliveryTime: new Date().toISOString(),
+        dishes: [...dishesCollection],
+        totalPrice: calculateTotalPrice()
+    };
+
+    let orders = JSON.parse(localStorage.getItem('userOrders')) || [];
+    orders.unshift({
+        id: Date.now().toString(),
+        date: new Date().toISOString(),
+        ...orderData
+    });
+    
+    localStorage.setItem('userOrders', JSON.stringify(orders));
+    
+    dishesCollection = [];
+    updateOrderModal();
+    closeOrderForm();
+    
+    alert('Заказ успешно оформлен!');
+    
+    return true;
+}
+function calculateTotalPrice() {
+    let total = 0;
+    dishesCollection.forEach(dish => {
+        total += dish.price * dish.quantity;
+    });
+    return total;
+}
+

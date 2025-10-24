@@ -1,0 +1,446 @@
+/* orders.css */
+.orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 80vh;
+    box-sizing: border-box;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #4CAF50;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-number {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.order-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.order-content {
+    margin-bottom: 15px;
+}
+
+.order-dishes {
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.order-price {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #4CAF50;
+    margin-bottom: 8px;
+}
+
+.order-delivery {
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1.2em;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-details { 
+    color: #2196F3; 
+}
+
+.btn-edit { 
+    color: #FF9800; 
+}
+
+.btn-delete { 
+    color: #f44336; 
+}
+
+.btn-action:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.1);
+}
+
+.empty-orders {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.empty-orders p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #0b990b;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    background-color: #52c126;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal {
+    background: white;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+    flex-shrink: 0;
+}
+
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5em;
+    padding-right: 10px;
+    border-top: none !important;
+    border-bottom: none !important;
+    background-color: transparent !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    width: auto !important;
+    color: #333 !important;
+}
+
+.modal .modal-header h2.order-header-details {
+    border-top: none !important;
+    border-bottom: none !important;
+    background-color: transparent !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    width: auto !important;
+    color: #333 !important;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #666;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 40px;
+}
+
+.close-modal:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.modal-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    background-color: #f8f9fa;
+    flex-shrink: 0;
+}
+
+.btn-ok, .btn-save, .btn-confirm, .btn-cancel {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    min-height: 44px;
+    min-width: 80px;
+}
+
+.btn-ok, .btn-save, .btn-confirm {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-ok:hover, .btn-save:hover, .btn-confirm:hover {
+    background: #45a049;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-group {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.detail-group h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.1em;
+    text-align: left;
+    border: none;
+    background: none;
+}
+
+.detail-group p {
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.order-dish-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.order-dish-item:last-child {
+    border-bottom: none;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #4CAF50;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: inherit;
+    box-sizing: border-box;
+    min-height: 44px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.notification.success {
+    background: #4CAF50;
+}
+
+.notification.error {
+    background: #f44336;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.bi {
+    vertical-align: middle;
+}
+
+.btn-action:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+}
+
+.modal:focus {
+    outline: none;
+}
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: "Загрузка...";
+    display: block;
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Специфичные стили для страницы заказов */
+body.orders-page main h2 {
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    text-align: center;
+    background-color: #deac14;
+}
+
+/* Отдельные стили для заголовков на странице заказов */
+.orders-page .main_header {
+    width: 100%;
+    color: #0b990b;
+    background-color: #deac14;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace;
+    text-shadow: 3px 2px black;
+    margin: auto;
+    margin-bottom: 5%;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    text-align: center;
+}
+

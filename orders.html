@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Мои заказы - LaunchTime</title>
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="orders.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class = "orders-page">
+    <header> 
+        <nav class="main_nav">
+            <ul class="navigation-list">
+                <li>
+                    <a href="menu.html" class="order-main-ref">Меню</a>
+                </li>
+                <li>
+                    <a href="orders.html" class="login-button active">Мои заказы</a>
+                </li>
+                <li>
+                    <a href="index.html" class="block-main-ref">На главную</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="main_header">Lunch Time</h1>
+        <h2>Мои заказы</h2>
+        <div class="orders-container">
+            <div class="orders-list" id="orders-list">
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="details-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class = "order-header-details">Детали заказа</h2>
+                <button class="close-modal" data-modal="details">×</button>
+            </div>
+            <div class="modal-content" id="details-content">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-ok" data-modal="details">ОК</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="edit-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Редактирование заказа</h2>
+                <button class="close-modal" data-modal="edit">×</button>
+            </div>
+            <form class="modal-content" id="edit-form">
+
+            </form>
+            <div class="modal-footer">
+                <button type="submit" class="btn-save" form="edit-form">Сохранить</button>
+                <button class="btn-cancel" data-modal="edit">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="delete-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Удаление заказа</h2>
+                <button class="close-modal" data-modal="delete">×</button>
+            </div>
+            <div class="modal-content">
+                <p>Вы уверены, что хотите удалить этот заказ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm" id="confirm-delete">Да</button>
+                <button class="btn-cancel" data-modal="delete">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+
+    <template id="empty-orders-template">
+        <div class="empty-orders">
+            <p>У вас пока нет заказов</p>
+            <a href="menu.html" class="btn-primary">Сделать первый заказ</a>
+        </div>
+    </template>
+
+
+    <template id="order-card-template">
+        <div class="order-card" data-order-id="">
+            <div class="order-header">
+                <div>
+                    <span class="order-number"></span>
+                    <span class="order-date"></span>
+                </div>
+            </div>
+            <div class="order-content">
+                <div class="order-dishes"></div>
+                <div class="order-price"></div>
+                <div class="order-delivery"></div>
+            </div>
+            <div class="order-actions">
+                <button class="btn-action btn-details" data-order-id="" title="Подробнее">
+                    <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn-action btn-edit" data-order-id="" title="Редактировать">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn-action btn-delete" data-order-id="" title="Удалить">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="order-details-template">
+        <div class="order-details">
+            <div class="detail-group">
+                <h3>Информация о получателе</h3>
+                <p><strong>ФИО:</strong> <span class="customer-fullName"></span></p>
+                <p><strong>Email:</strong> <span class="customer-email"></span></p>
+                <p><strong>Телефон:</strong> <span class="customer-phone"></span></p>
+                <p><strong>Адрес:</strong> <span class="customer-address"></span></p>
+            </div>
+            
+            <div class="detail-group">
+                <h3>Состав заказа</h3>
+                <div class="order-dishes-list"></div>
+                <div class="order-total">
+                    <strong>Итого: <span class="total-price"></span> р.</strong>
+                    <span class="combo-discount"></span>
+                </div>
+            </div>
+            
+            <div class="detail-group">
+                <h3>Информация о доставке</h3>
+                <p><strong>Тип доставки:</strong> <span class="delivery-type"></span></p>
+                <p><strong>Время:</strong> <span class="delivery-time"></span></p>
+                <p class="order-comment" style="display: none;"><strong>Комментарий:</strong> <span class="comment-text"></span></p>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="edit-form-template">
+        <div class="form-group">
+            <label>ФИО</label>
+            <input type="text" name="fullName" value="" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" value="" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Телефон</label>
+            <input type="tel" name="phone" value="" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Адрес доставки</label>
+            <input type="text" name="address" value="" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Тип доставки</label>
+            <select name="deliveryType" required>
+                <option value="asap">Как можно скорее</option>
+                <option value="scheduled">Ко времени</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="delivery-time-group" style="display: none;">
+            <label>Время доставки</label>
+            <input type="datetime-local" name="deliveryTime" value="">
+        </div>
+        
+        <div class="form-group">
+            <label>Комментарий к заказу</label>
+            <textarea name="comment"></textarea>
+        </div>
+    </template>
+
+
+    <div class="notification" id="notification" style="display: none;"></div>
+
+    <footer>
+        <div>
+            <ul class="footer-list">
+                <li>✆ 7 (965) - 965 - 65 -56</li>
+                <li><a href="index.html#about" class="block-footer-ref">О нас</a></li>
+                <li><a class="block-footer-ref">Обратная связь</a></li>
+                <li>✉ LaunchTime@gmail.com</li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/orders.js"></script>
+</body>
+</html>
